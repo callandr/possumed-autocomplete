@@ -2,15 +2,10 @@
 
 The accessible autocomplete is a component that helps users choose answers from a list you provide. You can also use it to make the answers you get from users more consistent.
 
-If you're asking users to provide their country or territory, the [govuk-country-and-territory-autocomplete](https://github.com/alphagov/govuk-country-and-territory-autocomplete/blob/main/README.md) might be more appropriate.
-
 [![npm version](https://img.shields.io/npm/v/accessible-autocomplete.svg)](http://npm.im/accessible-autocomplete)
-
 [![gzip size](http://img.badgesize.io/https://unpkg.com/accessible-autocomplete/dist/accessible-autocomplete.min.js?compression=gzip)](https://unpkg.com/accessible-autocomplete/dist/accessible-autocomplete.min.js)
 
-[![Sauce Labs Build Status](https://saucelabs.com/browser-matrix/tvararu-alphagov.svg)](https://saucelabs.com/u/tvararu-alphagov)
-
-`accessible-autocomplete` is a JavaScript autocomplete built from the ground up to be accessible. The design goals are:
+`possumed-autocomplete` is a JavaScript autocomplete based on [accessible-autocomplete](https://github.com/alphagov/accessible-autocomplete), which was built from the ground up to be accessible. The original design goals were:
 
 - **Accessibility**: Following WAI-ARIA best practices and testing with assistive technologies.
 - **User experience**: Supporting a wide variety of user needs.
@@ -472,8 +467,6 @@ accessibleAutocomplete({
 ## Developing locally
 
 Check out the [CONTRIBUTING](CONTRIBUTING.md) guide for instructions.
-
-If you want to help and want to get more familiar with the codebase, try starting with the ["good for beginners"](https://github.com/alphagov/accessible-autocomplete/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+for+beginners%22) issues.
 
 ## License
 

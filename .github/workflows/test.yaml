@@ -34,9 +34,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Functional tests (Chromium)
-        run: npm run karma
-
       # Run check for `npm run build` unstaged changes
       - name: Check for unstaged changes
         run: node scripts/check-staged.mjs

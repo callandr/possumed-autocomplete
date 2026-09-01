@@ -2,26 +2,9 @@
 
 Contributions welcome, please raise a pull request.
 
-If you want to help and want to get more familiar with the codebase, try starting with the ["good for beginners"](https://github.com/alphagov/accessible-autocomplete/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+for+beginners%22) issues. Feel free to request more guidance in the issue comments.
-
 ## Requirements
 
-You will need a recent version of Node and npm installed. Check the `.nvmrc` for a recommended version:
-
-```bash
-$ node -v
-v14.21.3
-$ npm -v
-v6.14.18
-```
-
-To install Node (with npm) locally on macOS, we recommend [brew](https://brew.sh) with
-[nvm](https://github.com/nvm-sh/nvm):
-
-```bash
-brew install nvm
-nvm install
-```
+You will need a recent version of Node and npm installed. Check the `.nvmrc` for a recommended version.
 
 ## Project structure
 
@@ -48,18 +31,6 @@ Contributions will need to pass the linter and tests. To run everything once:
 
 ```bash
 npm test
-```
-
-To run the linter on its own:
-
-```bash
-npm run standard
-```
-
-To run the functional tests in dev mode (automatically reruns when a file changes):
-
-```bash
-npm run karma:dev
 ```
 
 To run the integration tests locally with Chrome (specified in [wdio.config.js](test/wdio.config.js)):
@@ -155,7 +126,3 @@ git pull --rebase
   8. Select **Publish release**.
 
 You do not need to manually attach source code files to the release on GitHub.
-
-Post a short summary of the release in the cross-government and GDS #govuk-design-system Slack channels. For example:
-
-🚀 We’ve just released Accessible Autocomplete v2.0.1. You can now use the acccessible autocomplete multiple times on one page. Thanks to @<SLACK-NAME> and @<SLACK-NAME> for helping with this release. [https://github.com/alphagov/accessible-autocomplete/releases/tag/v2.0.1](https://github.com/alphagov/accessible-autocomplete/releases/tag/v2.0.1)

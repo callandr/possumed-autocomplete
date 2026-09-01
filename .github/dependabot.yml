@@ -28,10 +28,7 @@ updates:
       test:
         patterns:
           - '@wdio/*'
-          - 'chai'
           - 'devtools'
-          - 'karma'
-          - 'karma-*'
           - 'mocha'
           - 'puppeteer'
           - 'webdriverio'
@@ -42,7 +39,6 @@ updates:
           - 'cross-env'
           - 'dotenv'
           - 'husky'
-          - 'npm-run-all'
 
     reviewers:
       - alphagov/design-system-developers
