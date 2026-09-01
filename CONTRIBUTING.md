@@ -11,11 +11,9 @@ You will need a recent version of Node and npm installed. Check the `.nvmrc` for
 ```
 $ ls
 dist/        # The compiled and ready to distribute build artefacts.
-screenshots/ # Gets outputted by the end to end tests when something goes wrong.
 examples/    # GitHub pages examples of using the autocomplete.
 scripts/     # Build scripts that don't fit in `package.json`.
 src/         # The source code for the library.
-test/        # The tests for the library.
 ```
 
 ## Build tasks
@@ -27,33 +25,11 @@ npm install
 npm run dev
 ```
 
-Contributions will need to pass the linter and tests. To run everything once:
+Contributions will need to pass the linter. To run everything once:
 
 ```bash
-npm test
+npm run build
 ```
-
-To run the integration tests locally with Chrome (specified in [wdio.config.js](test/wdio.config.js)):
-
-```bash
-npm run wdio
-```
-
-To run the integration tests on [Sauce Labs](https://saucelabs.com/), create a `.env` file with the following:
-
-```bash
-SAUCE_ENABLED="true"
-SAUCE_USERNAME="XXXXXXXX"
-SAUCE_ACCESS_KEY="YYYYYYYY"
-```
-
-And run the same command:
-
-```bash
-npm run wdio
-```
-
-Failed integration tests should output screenshots to the `./screenshots/` folder.
 
 To build the project for distribution:
 

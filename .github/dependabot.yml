@@ -25,19 +25,10 @@ updates:
           - 'webpack'
           - 'webpack-*'
 
-      test:
-        patterns:
-          - '@wdio/*'
-          - 'devtools'
-          - 'mocha'
-          - 'puppeteer'
-          - 'webdriverio'
-
       tools:
         patterns:
           - 'chalk'
           - 'cross-env'
-          - 'dotenv'
           - 'husky'
 
     reviewers:
