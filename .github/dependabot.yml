@@ -11,17 +11,9 @@ updates:
       build:
         patterns:
           - '@babel/*'
-          - 'autoprefixer'
           - 'babel-*'
           - 'core-js'
-          - 'cssnano'
-          - 'cssnano-*'
-          - 'css-loader'
-          - 'mini-css-extract-plugin'
-          - 'postcss'
-          - 'postcss-*'
           - 'source-map-loader'
-          - 'terser-*'
           - 'webpack'
           - 'webpack-*'
 

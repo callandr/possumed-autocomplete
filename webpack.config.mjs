@@ -1,8 +1,6 @@
 import { join } from 'path'
 import { cwd } from 'process'
 
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import TerserPlugin from 'terser-webpack-plugin'
 import webpack from 'webpack'
 
 const {
@@ -25,24 +23,24 @@ const mode = ['development', 'test'].includes(NODE_ENV)
 const config = {
   bail: mode === 'production',
   context: join(cwd(), 'src'),
-
   devtool: mode === 'development'
     ? 'inline-source-map'
     : 'source-map',
 
+  // Use webpack's native CSS support instead of mini-css-extract-plugin
+  experiments: {
+    css: true
+  },
+
   externalsType: 'umd',
   mode,
 
+  // Resolve the browserslist target (`.browserslistrc`) so the built-in CSS
+  // minimizer can add the vendor prefixes autoprefixer used to provide
+  target: 'browserslist',
+
   module: {
     rules: [
-      {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader'
-        ]
-      },
       {
         test: /\.js$/,
         include: join(cwd(), 'src'),
@@ -70,26 +68,31 @@ const config = {
 
   optimization: {
     emitOnErrors: mode === 'production',
-    minimize: mode === 'production',
-    minimizer: [new TerserPlugin({
-      extractComments: true,
-      terserOptions: {
-        format: { comments: false },
 
-        // Include sources content from dependency source maps
-        sourceMap: {
-          includeSources: true
-        },
+    // Native minimization: JS via terser, CSS via the built-in minimizer
+    minimize: mode === 'production'
+      ? {
+          javascript: {
+            format: { comments: false },
 
-        // Compatibility workarounds
-        safari10: true
-      }
-    })]
+            // Compatibility workarounds
+            safari10: true
+          },
+
+          // Minify CSS with the built-in minimizer, adding vendor prefixes
+          // for the browserslist target (replaces cssnano + autoprefixer)
+          css: {}
+        }
+      : false
   },
 
   output: {
     path: join(cwd(), 'dist'),
-    publicPath: '/dist'
+    publicPath: '/dist',
+
+    // Extract CSS into a separate file
+    // e.g. 'dist/accessible-autocomplete.min.css'
+    cssFilename: '[name].min.css'
   },
 
   stats: {
@@ -138,9 +141,6 @@ const bundleStandalone = {
     new webpack.DefinePlugin({
       'process.env.COMPONENT_LIBRARY': '"PREACT"',
       'process.env.NODE_ENV': `"${mode}"`
-    }),
-    new MiniCssExtractPlugin({
-      filename: '[name].min.css'
     })
   ]
 }

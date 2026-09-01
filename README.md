@@ -1,9 +1,9 @@
-# Accessible autocomplete
+# Possumed autocomplete 🐀
 
-The accessible autocomplete is a component that helps users choose answers from a list you provide. You can also use it to make the answers you get from users more consistent.
+This accessible autocomplete is a component that helps users choose answers from a list you provide. You can also use it to make the answers you get from users more consistent.
 
 [![npm version](https://img.shields.io/npm/v/accessible-autocomplete.svg)](http://npm.im/accessible-autocomplete)
-[![gzip size](http://img.badgesize.io/https://unpkg.com/accessible-autocomplete/dist/accessible-autocomplete.min.js?compression=gzip)](https://unpkg.com/accessible-autocomplete/dist/accessible-autocomplete.min.js)
+[![gzip size](http://img.badgesize.io/https://unpkg.com/possumed-autocomplete/dist/accessible-autocomplete.min.js?compression=gzip)](https://unpkg.com/possumed-autocomplete/dist/accessible-autocomplete.min.js)
 
 `possumed-autocomplete` is a JavaScript autocomplete based on [accessible-autocomplete](https://github.com/alphagov/accessible-autocomplete), which was built from the ground up to be accessible. The original design goals were:
 
