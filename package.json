@@ -1,6 +1,6 @@
 {
   "name": "possumed-autocomplete",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "main": "dist/accessible-autocomplete.min.js",
   "style": "dist/accessible-autocomplete.min.css",
   "description": "An autocomplete component, built to be accessible.",
@@ -52,7 +52,6 @@
     "css-loader": "^6.10.0",
     "cssnano": "^6.0.3",
     "cssnano-preset-default": "^6.0.3",
-    "devtools": "^8.39.1",
     "dotenv": "^16.4.5",
     "husky": "^9.1.5",
     "karma": "^6.4.4",
@@ -72,7 +71,7 @@
     "standard": "^17.1.0",
     "terser-webpack-plugin": "^5.3.9",
     "webdriverio": "^8.28.6",
-    "webpack": "5.91",
+    "webpack": "5.92",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.1"
   },

@@ -74,11 +74,6 @@ exports.config = {
   user: SAUCE_USERNAME,
   key: SAUCE_ACCESS_KEY,
 
-  // Use DevTools prototype for Puppeteer
-  automationProtocol: SAUCE_ENABLED === 'true'
-    ? 'webdriver'
-    : 'devtools',
-
   baseUrl: `http://localhost:${PORT}`,
 
   capabilities: SAUCE_ENABLED === 'true'
