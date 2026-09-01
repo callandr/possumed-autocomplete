@@ -34,7 +34,6 @@ updates:
           - 'karma-*'
           - 'mocha'
           - 'puppeteer'
-          - 'standard'
           - 'webdriverio'
 
       tools:

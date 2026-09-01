@@ -5,7 +5,7 @@ The accessible autocomplete is a component that helps users choose answers from 
 If you're asking users to provide their country or territory, the [govuk-country-and-territory-autocomplete](https://github.com/alphagov/govuk-country-and-territory-autocomplete/blob/main/README.md) might be more appropriate.
 
 [![npm version](https://img.shields.io/npm/v/accessible-autocomplete.svg)](http://npm.im/accessible-autocomplete)
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
 [![gzip size](http://img.badgesize.io/https://unpkg.com/accessible-autocomplete/dist/accessible-autocomplete.min.js?compression=gzip)](https://unpkg.com/accessible-autocomplete/dist/accessible-autocomplete.min.js)
 
 [![Sauce Labs Build Status](https://saucelabs.com/browser-matrix/tvararu-alphagov.svg)](https://saucelabs.com/u/tvararu-alphagov)
@@ -20,16 +20,6 @@ If you're asking users to provide their country or territory, the [govuk-country
 
 ---
 
-## Support
-
-The GOV.UK Design System team maintains the accessible autocomplete as a standalone component. However, we’re only able to put in minimal work to support it.
-
-[Read about our plans to maintain this component](https://github.com/alphagov/accessible-autocomplete/issues/532).
-
-[Read more about the types of support we can provide](https://github.com/alphagov/accessible-autocomplete/issues/430).
-
----
-
 ## Installation / usage
 
 ### Using npm and a module system
@@ -37,7 +27,7 @@ The GOV.UK Design System team maintains the accessible autocomplete as a standal
 Install it by running:
 
 ```bash
-npm install --save accessible-autocomplete
+npm install --save possumed-autocomplete
 ```
 
 The `accessibleAutocomplete` function will render an autocomplete `<input>` and its accompanying suggestions and `aria-live` region. Your page should provide a `<label>` and a container element:
@@ -50,7 +40,7 @@ The `accessibleAutocomplete` function will render an autocomplete `<input>` and 
 Then import it using a module system like Browserify / Webpack / Rollup, and call the `accessibleAutocomplete` function, providing an array of values:
 
 ```js
-import accessibleAutocomplete from 'accessible-autocomplete'
+import accessibleAutocomplete from 'possumed-autocomplete'
 
 const countries = [
   'France',

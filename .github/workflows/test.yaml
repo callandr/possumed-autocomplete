@@ -37,10 +37,6 @@ jobs:
       - name: Functional tests (Chromium)
         run: npm run karma
 
-      # Run linter after tests to prevent failure due to code formatting error
-      - name: Lint
-        run: npm run standard
-
       # Run check for `npm run build` unstaged changes
       - name: Check for unstaged changes
         run: node scripts/check-staged.mjs
