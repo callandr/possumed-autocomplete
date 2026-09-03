@@ -43,12 +43,6 @@ const config = {
     rules: [
       {
         test: /\.js$/,
-        include: join(cwd(), 'src'),
-        enforce: 'pre',
-        loader: 'source-map-loader'
-      },
-      {
-        test: /\.js$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',

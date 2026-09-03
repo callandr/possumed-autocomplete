@@ -1,6 +1,6 @@
 {
   "name": "possumed-autocomplete",
-  "version": "3.2.2",
+  "version": "3.2.3",
   "main": "dist/accessible-autocomplete.min.js",
   "style": "dist/accessible-autocomplete.min.css",
   "description": "An autocomplete component, built to be accessible.",
@@ -19,7 +19,6 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --progress",
     "dev": "cross-env NODE_ENV=development webpack serve",
-    "prepare": "node -e \"try { (await import('husky')).default() } catch (e) { if (e.code !== 'ERR_MODULE_NOT_FOUND') throw e }\" --input-type module",
     "version": "git add -A dist"
   },
   "devDependencies": {
@@ -31,7 +30,6 @@
     "core-js": "^3.36.0",
     "cross-env": "^7.0.3",
     "preact": "^10.0.0",
-    "source-map-loader": "^5.0.0",
     "webpack": "^5.110.3",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "5.1"
