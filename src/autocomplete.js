@@ -10,11 +10,11 @@ const keyCodes = {
   40: 'down'
 }
 
-function isIosDevice () {
+function isIosDevice() {
   return typeof navigator !== 'undefined' && !!(navigator.userAgent.match(/(iPod|iPhone|iPad)/g) && navigator.userAgent.match(/AppleWebKit/g))
 }
 
-function isPrintableKeyCode (keyCode) {
+function isPrintableKeyCode(keyCode) {
   return (
     (keyCode > 47 && keyCode < 58) || // number keys
     keyCode === 32 || keyCode === 8 || // spacebar or backspace
@@ -34,7 +34,7 @@ export default class Autocomplete extends Component {
     minLength: 0,
     name: 'input-autocomplete',
     placeholder: '',
-    onConfirm: () => {},
+    onConfirm: () => { },
     confirmOnBlur: true,
     showNoOptionsFound: true,
     showAllValues: false,
@@ -50,7 +50,7 @@ export default class Autocomplete extends Component {
 
   elementReferences = {}
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -88,15 +88,15 @@ export default class Autocomplete extends Component {
     this.getDirectInputChanges = this.getDirectInputChanges.bind(this)
   }
 
-  isQueryAnOption (query, options) {
+  isQueryAnOption(query, options) {
     return options.map(entry => this.templateInputValue(entry).toLowerCase()).indexOf(query.toLowerCase()) !== -1
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.pollInputElement()
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     clearTimeout(this.$pollInput)
   }
 
@@ -104,14 +104,14 @@ export default class Autocomplete extends Component {
   // `input` field by directly changing its `.value`. These events
   // don't trigger our JavaScript event listeners, so we need to poll
   // to handle when and if they occur.
-  pollInputElement () {
+  pollInputElement() {
     this.getDirectInputChanges()
     this.$pollInput = setTimeout(() => {
       this.pollInputElement()
     }, 100)
   }
 
-  getDirectInputChanges () {
+  getDirectInputChanges() {
     const inputReference = this.elementReferences[-1]
     const queryHasChanged = inputReference && inputReference.value !== this.state.query
 
@@ -120,7 +120,7 @@ export default class Autocomplete extends Component {
     }
   }
 
-  componentDidUpdate (prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     const { focused } = this.state
     const componentLostFocus = focused === null
     const focusedChanged = prevState.focused !== focused
@@ -137,23 +137,23 @@ export default class Autocomplete extends Component {
     }
   }
 
-  hasAutoselect () {
+  hasAutoselect() {
     return isIosDevice() ? false : this.props.autoselect
   }
 
-  // This template is used when converting from a state.options object into a state.query.
-  templateInputValue (value) {
+  // This template is used when converting from a state.options object into a state.query
+  templateInputValue(value) {
     const inputValueTemplate = this.props.templates && this.props.templates.inputValue
     return inputValueTemplate ? inputValueTemplate(value) : value
   }
 
-  // This template is used when displaying results / suggestions.
-  templateSuggestion (value) {
+  // This template is used when displaying results / suggestions
+  templateSuggestion(value) {
     const suggestionTemplate = this.props.templates && this.props.templates.suggestion
     return suggestionTemplate ? suggestionTemplate(value) : value
   }
 
-  handleComponentBlur (newState) {
+  handleComponentBlur(newState) {
     const { options, query, selected } = this.state
     let newQuery
     if (this.props.confirmOnBlur) {
@@ -171,13 +171,13 @@ export default class Autocomplete extends Component {
     })
   }
 
-  handleListMouseLeave (event) {
+  handleListMouseLeave(event) {
     this.setState({
       hovered: null
     })
   }
 
-  handleOptionBlur (event, index) {
+  handleOptionBlur(event, index) {
     const { focused, menuOpen, options, selected } = this.state
     const focusingOutsideComponent = event.relatedTarget === null
     const focusingInput = event.relatedTarget === this.elementReferences[-1]
@@ -192,7 +192,7 @@ export default class Autocomplete extends Component {
     }
   }
 
-  handleInputBlur (event) {
+  handleInputBlur(event) {
     const { focused, menuOpen, options, query, selected } = this.state
     const focusingAnOption = focused !== -1
     if (!focusingAnOption) {
@@ -205,7 +205,7 @@ export default class Autocomplete extends Component {
     }
   }
 
-  handleInputChange (event) {
+  handleInputChange(event) {
     const { minLength, source, showAllValues } = this.props
     const autoselect = this.hasAutoselect()
     const query = event.target.value
@@ -237,11 +237,11 @@ export default class Autocomplete extends Component {
     }
   }
 
-  handleInputClick (event) {
+  handleInputClick(event) {
     this.handleInputChange(event)
   }
 
-  handleInputFocus (event) {
+  handleInputFocus(event) {
     const { query, validChoiceMade, options } = this.state
     const { minLength } = this.props
     const shouldReopenMenu = !validChoiceMade && query.length >= minLength && options.length > 0
@@ -253,7 +253,7 @@ export default class Autocomplete extends Component {
     }
   }
 
-  handleOptionFocus (index) {
+  handleOptionFocus(index) {
     this.setState({
       focused: index,
       hovered: null,
@@ -261,7 +261,7 @@ export default class Autocomplete extends Component {
     })
   }
 
-  handleOptionMouseEnter (event, index) {
+  handleOptionMouseEnter(event, index) {
     // iOS Safari prevents click event if mouseenter adds hover background colour
     // See: https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/HandlingEvents/HandlingEvents.html#//apple_ref/doc/uid/TP40006511-SW4
     if (!isIosDevice()) {
@@ -271,7 +271,7 @@ export default class Autocomplete extends Component {
     }
   }
 
-  handleOptionClick (event, index) {
+  handleOptionClick(event, index) {
     const selectedOption = this.state.options[index]
     const newQuery = this.templateInputValue(selectedOption)
     this.props.onConfirm(selectedOption)
@@ -286,7 +286,7 @@ export default class Autocomplete extends Component {
     this.forceUpdate()
   }
 
-  handleOptionMouseDown (event) {
+  handleOptionMouseDown(event) {
     // Safari triggers focusOut before click, but if you
     // preventDefault on mouseDown, you can stop that from happening.
     // If this is removed, clicking on an option in Safari will trigger
@@ -296,7 +296,7 @@ export default class Autocomplete extends Component {
     event.preventDefault()
   }
 
-  handleUpArrow (event) {
+  handleUpArrow(event) {
     event.preventDefault()
     const { menuOpen, selected } = this.state
     const isNotAtTop = selected !== -1
@@ -306,7 +306,7 @@ export default class Autocomplete extends Component {
     }
   }
 
-  handleDownArrow (event) {
+  handleDownArrow(event) {
     event.preventDefault()
     // if not open, open
     if (this.props.showAllValues && this.state.menuOpen === false) {
@@ -330,7 +330,7 @@ export default class Autocomplete extends Component {
     }
   }
 
-  handleSpace (event) {
+  handleSpace(event) {
     // if not open, open
     if (this.props.showAllValues && this.state.menuOpen === false && this.state.query === '') {
       event.preventDefault()
@@ -348,7 +348,7 @@ export default class Autocomplete extends Component {
     }
   }
 
-  handleEnter (event) {
+  handleEnter(event) {
     if (this.state.menuOpen) {
       event.preventDefault()
       const hasSelectedOption = this.state.selected >= 0
@@ -358,7 +358,7 @@ export default class Autocomplete extends Component {
     }
   }
 
-  handlePrintableKey (event) {
+  handlePrintableKey(event) {
     const inputElement = this.elementReferences[-1]
     const eventIsOnInput = event.target === inputElement
     if (!eventIsOnInput) {
@@ -369,7 +369,7 @@ export default class Autocomplete extends Component {
     }
   }
 
-  handleKeyDown (event) {
+  handleKeyDown(event) {
     switch (keyCodes[event.keyCode]) {
       case 'up':
         this.handleUpArrow(event)
@@ -396,7 +396,7 @@ export default class Autocomplete extends Component {
     }
   }
 
-  render () {
+  render() {
     const {
       cssNamespace,
       displayMenu,
@@ -418,9 +418,9 @@ export default class Autocomplete extends Component {
       hintClasses,
       menuClasses
     } = this.props
+
     const { focused, hovered, menuOpen, options, query, selected, ariaHint, validChoiceMade } = this.state
     const autoselect = this.hasAutoselect()
-
     const inputFocused = focused === -1
     const noOptionsAvailable = options.length === 0
     const queryNotEmpty = query.length !== 0
@@ -564,8 +564,8 @@ export default class Autocomplete extends Component {
             const optionModifierOdd = (index % 2) ? ` ${optionClassName}--odd` : ''
             const iosPosinsetHtml = (isIosDevice())
               ? `<span id=${id}__option-suffix--${index} style="border:0;clip:rect(0 0 0 0);height:1px;` +
-                'marginBottom:-1px;marginRight:-1px;overflow:hidden;padding:0;position:absolute;' +
-                'whiteSpace:nowrap;width:1px">' + ` ${index + 1} of ${options.length}</span>`
+              'marginBottom:-1px;marginRight:-1px;overflow:hidden;padding:0;position:absolute;' +
+              'whiteSpace:nowrap;width:1px">' + ` ${index + 1} of ${options.length}</span>`
               : ''
 
             return (
@@ -592,9 +592,7 @@ export default class Autocomplete extends Component {
             <li className={`${optionClassName} ${optionClassName}--no-results`} role='option' aria-disabled='true'>{tNoResults()}</li>
           )}
         </ul>
-
         <span id={assistiveHintID} style={{ display: 'none' }}>{tAssistiveHint()}</span>
-
       </div>
     )
   }
