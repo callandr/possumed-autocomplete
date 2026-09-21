@@ -1,6 +1,6 @@
 {
   "name": "possumed-autocomplete",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "main": "dist/accessible-autocomplete.min.js",
   "style": "dist/accessible-autocomplete.min.css",
   "description": "An autocomplete component, built to be accessible.",
@@ -22,11 +22,11 @@
     "version": "git add -A dist"
   },
   "devDependencies": {
-    "@babel/core": "7.24",
-    "@babel/eslint-parser": "7.24",
-    "@babel/plugin-transform-react-jsx": "7.24",
-    "@babel/preset-env": "7.24",
-    "babel-loader": "9.2",
+    "@babel/core": "8.0.6",
+    "@babel/plugin-transform-react-jsx": "8.0.1",
+    "@babel/preset-env": "8.0.6",
+    "babel-loader": "10.1.1",
+    "babel-plugin-polyfill-corejs3": "1.0.0",
     "core-js": "3.40",
     "cross-env": "^10.1.0",
     "preact": "^10.0.0",

@@ -1,10 +1,16 @@
 import { createElement, render } from 'preact' /** @jsx createElement */
 import Autocomplete from './autocomplete'
 
-function accessibleAutocomplete (options) {
-  if (!options.element) { throw new Error('element is not defined') }
-  if (!options.id) { throw new Error('id is not defined') }
-  if (!options.source) { throw new Error('source is not defined') }
+function accessibleAutocomplete(options) {
+  if (!options.element) {
+    throw new Error('element is not defined')
+  }
+  if (!options.id) {
+    throw new Error('id is not defined')
+  }
+  if (!options.source) {
+    throw new Error('source is not defined')
+  }
   if (Array.isArray(options.source)) {
     options.source = createSimpleEngine(options.source)
   }
@@ -16,17 +22,22 @@ const createSimpleEngine = (values) => (query, syncResults) => {
   syncResults(matches)
 }
 
-accessibleAutocomplete.enhanceSelectElement = (configurationOptions) => {
-  if (!configurationOptions.selectElement) { throw new Error('selectElement is not defined') }
+accessibleAutocomplete.enhanceSelectElement = configurationOptions => {
+  if (!configurationOptions.selectElement) {
+    throw new Error('selectElement is not defined')
+  }
 
-  // Set defaults.
+  // Set defaults
   if (!configurationOptions.source) {
     const availableOptions = [].filter.call(configurationOptions.selectElement.options, option => (option.value || configurationOptions.preserveNullOptions))
     configurationOptions.source = availableOptions.map(option => option.textContent || option.innerText)
   }
+
   configurationOptions.onConfirm = configurationOptions.onConfirm || (query => {
     const requestedOption = [].filter.call(configurationOptions.selectElement.options, option => (option.textContent || option.innerText) === query)[0]
-    if (requestedOption) { requestedOption.selected = true }
+    if (requestedOption) {
+      requestedOption.selected = true
+    }
   })
 
   if (configurationOptions.selectElement.value || configurationOptions.defaultValue === undefined) {
@@ -34,7 +45,10 @@ accessibleAutocomplete.enhanceSelectElement = (configurationOptions) => {
     configurationOptions.defaultValue = option.textContent || option.innerText
   }
 
-  if (configurationOptions.name === undefined) configurationOptions.name = ''
+  if (configurationOptions.name === undefined) {
+    configurationOptions.name = ''
+  }
+
   if (configurationOptions.id === undefined) {
     if (configurationOptions.selectElement.id === undefined) {
       configurationOptions.id = ''
@@ -42,10 +56,12 @@ accessibleAutocomplete.enhanceSelectElement = (configurationOptions) => {
       configurationOptions.id = configurationOptions.selectElement.id
     }
   }
-  if (configurationOptions.autoselect === undefined) configurationOptions.autoselect = true
+
+  if (configurationOptions.autoselect === undefined) {
+    configurationOptions.autoselect = true
+  }
 
   const element = document.createElement('div')
-
   configurationOptions.selectElement.parentNode.insertBefore(element, configurationOptions.selectElement)
 
   accessibleAutocomplete({

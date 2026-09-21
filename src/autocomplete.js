@@ -45,7 +45,8 @@ export default class Autocomplete extends Component {
     menuAttributes: {},
     inputClasses: null,
     hintClasses: null,
-    menuClasses: null
+    menuClasses: null,
+    resettable: false
   }
 
   elementReferences = {}
@@ -109,7 +110,9 @@ export default class Autocomplete extends Component {
   }
 
   handleResetDropdown() {
-    this.setState(this.getInitialState())
+    if (this.props.resettable) {
+      this.setState(this.getInitialState())
+    }
   }
 
   // Applications like Dragon NaturallySpeaking will modify the
