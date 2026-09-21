@@ -53,17 +53,9 @@ export default class Autocomplete extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      focused: null,
-      hovered: null,
-      menuOpen: false,
-      options: props.defaultValue ? [props.defaultValue] : [],
-      query: props.defaultValue,
-      validChoiceMade: false,
-      selected: null,
-      ariaHint: true
-    }
+    this.state = this.getInitialState()
 
+    this.handleResetDropdown = this.handleResetDropdown.bind(this)
     this.handleComponentBlur = this.handleComponentBlur.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
     this.handleUpArrow = this.handleUpArrow.bind(this)
@@ -92,12 +84,32 @@ export default class Autocomplete extends Component {
     return options.map(entry => this.templateInputValue(entry).toLowerCase()).indexOf(query.toLowerCase()) !== -1
   }
 
+  getInitialState() {
+    const { defaultValue } = this.props
+    return {
+      focused: null,
+      hovered: null,
+      menuOpen: false,
+      options: defaultValue ? [defaultValue] : [],
+      query: defaultValue,
+      validChoiceMade: false,
+      selected: null,
+      ariaHint: true
+    }
+  }
+
   componentDidMount() {
+    window.addEventListener('resetDropdown', this.handleResetDropdown)
     this.pollInputElement()
   }
 
   componentWillUnmount() {
     clearTimeout(this.$pollInput)
+    window.removeEventListener('resetDropdown', this.handleResetDropdown)
+  }
+
+  handleResetDropdown() {
+    this.setState(this.getInitialState())
   }
 
   // Applications like Dragon NaturallySpeaking will modify the
@@ -108,7 +120,7 @@ export default class Autocomplete extends Component {
     this.getDirectInputChanges()
     this.$pollInput = setTimeout(() => {
       this.pollInputElement()
-    }, 100)
+    }, 200)
   }
 
   getDirectInputChanges() {
