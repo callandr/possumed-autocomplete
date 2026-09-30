@@ -49,6 +49,35 @@ Preact itself, override `props` in your subclass the same way.
 
 The React bundle is unaffected and remains UMD.
 
+#### The bundles no longer ship polyfills
+
+`babel-plugin-polyfill-corejs3` and `core-js` have been removed. The bundles are
+now roughly half to two thirds smaller:
+
+| Bundle | Before | After |
+| --- | --- | --- |
+| `dist/accessible-autocomplete.min.js` | 48.3 KB | 24.0 KB |
+| `dist/lib/accessible-autocomplete.preact.min.mjs` | 32.3 KB | 12.0 KB |
+| `dist/lib/accessible-autocomplete.react.min.js` | 33.0 KB | 13.0 KB |
+
+This completes the direction set out in [3.0.0](#300---2024-04-19). The only
+polyfills the build was injecting were `Error.cause`, `Array.prototype.push`,
+`RegExp.prototype.exec` and the `Iterator.prototype.map`/`filter` iterator
+helpers. None of them are needed: the component only ever calls `Array` methods,
+and those are natively supported by every browser in the browserslist targets.
+The iterator helper polyfills were a false positive — the plugin could not infer
+that `.map()` and `.filter()` were being called on arrays, so it patched the
+prototype `Iterator` instead.
+
+**This means the bundles no longer mutate globals when they load.** Previously
+the component patched `Error`, `Array.prototype`, `RegExp` and `Iterator` on
+every page that used it. If any other code in your service was relying on those
+side effects, it will need its own polyfills. Loading the bundle now adds no new
+global properties.
+
+Syntax transpilation is unaffected. The browserslist targets are unchanged, and
+`Symbol` and `queueMicrotask` remain unpolyfilled, as described above.
+
 ## 3.0.1 - 2024-09-12
 
 ### Fixes

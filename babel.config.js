@@ -34,7 +34,6 @@ module.exports = {
   ],
 
   plugins: [
-    ['babel-plugin-polyfill-corejs3', { method: 'usage-global', version: '3.40' }],
     ['@babel/plugin-transform-react-jsx', { pragma: 'h', runtime: 'classic' }]
   ]
 }

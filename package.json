@@ -1,6 +1,6 @@
 {
   "name": "possumed-autocomplete",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "main": "dist/accessible-autocomplete.min.js",
   "style": "dist/accessible-autocomplete.min.css",
   "exports": {
@@ -34,8 +34,6 @@
     "@babel/plugin-transform-react-jsx": "8.0.1",
     "@babel/preset-env": "8.0.6",
     "babel-loader": "10.1.1",
-    "babel-plugin-polyfill-corejs3": "1.0.0",
-    "core-js": "3.40",
     "cross-env": "^10.1.0",
     "preact": "^11.0.0",
     "webpack": "^5.111.1",
