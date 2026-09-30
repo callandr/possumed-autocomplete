@@ -1,6 +1,7 @@
 import { createElement, Component } from 'preact' /** @jsx createElement */
 import Status from './status'
 import DropdownArrowDown from './dropdown-arrow-down'
+import { createDefaultProps } from './default-props'
 
 const keyCodes = {
   13: 'enter',
@@ -25,31 +26,46 @@ function isPrintableKeyCode(keyCode) {
   )
 }
 
+const defaultProps = {
+  autoselect: false,
+  cssNamespace: 'autocomplete',
+  defaultValue: '',
+  displayMenu: 'inline',
+  minLength: 0,
+  name: 'input-autocomplete',
+  placeholder: '',
+  onConfirm: () => { },
+  confirmOnBlur: true,
+  showNoOptionsFound: true,
+  showAllValues: false,
+  required: false,
+  tNoResults: () => 'No results found',
+  tAssistiveHint: () => 'When autocomplete results are available use up and down arrows to review and enter to select.  Touch device users, explore by touch or with swipe gestures.',
+  dropdownArrow: DropdownArrowDown,
+  menuAttributes: {},
+  inputClasses: null,
+  hintClasses: null,
+  menuClasses: null,
+  resettable: false
+}
+
+const normalizeProps = createDefaultProps(defaultProps)
+
 export default class Autocomplete extends Component {
-  static defaultProps = {
-    autoselect: false,
-    cssNamespace: 'autocomplete',
-    defaultValue: '',
-    displayMenu: 'inline',
-    minLength: 0,
-    name: 'input-autocomplete',
-    placeholder: '',
-    onConfirm: () => { },
-    confirmOnBlur: true,
-    showNoOptionsFound: true,
-    showAllValues: false,
-    required: false,
-    tNoResults: () => 'No results found',
-    tAssistiveHint: () => 'When autocomplete results are available use up and down arrows to review and enter to select.  Touch device users, explore by touch or with swipe gestures.',
-    dropdownArrow: DropdownArrowDown,
-    menuAttributes: {},
-    inputClasses: null,
-    hintClasses: null,
-    menuClasses: null,
-    resettable: false
-  }
+  static defaultProps = defaultProps
 
   elementReferences = {}
+
+  // Preact 11 no longer applies `defaultProps` when creating a vnode, so the
+  // defaults are merged in on every props assignment instead. Preact reads and
+  // writes `this.props` directly, so both accessors are required.
+  get props () {
+    return this._defaultedProps
+  }
+
+  set props (props) {
+    this._defaultedProps = normalizeProps(props)
+  }
 
   constructor(props) {
     super(props)

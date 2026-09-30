@@ -1,4 +1,5 @@
 import { createElement, Component } from 'preact' /** @jsx createElement */
+import { createDefaultProps } from './default-props'
 
 const debounce = function (func, wait, immediate) {
   let timeout
@@ -17,24 +18,39 @@ const debounce = function (func, wait, immediate) {
 }
 const statusDebounceMillis = 1400
 
-export default class Status extends Component {
-  static defaultProps = {
-    tQueryTooShort: (minQueryLength) => `Type in ${minQueryLength} or more characters for results`,
-    tNoResults: () => 'No search results',
-    tSelectedOption: (selectedOption, length, index) => `${selectedOption} ${index + 1} of ${length} is highlighted`,
-    tResults: (length, contentSelectedOption) => {
-      const words = {
-        result: (length === 1) ? 'result' : 'results',
-        is: (length === 1) ? 'is' : 'are'
-      }
-
-      return `${length} ${words.result} ${words.is} available. ${contentSelectedOption}`
+const defaultProps = {
+  tQueryTooShort: (minQueryLength) => `Type in ${minQueryLength} or more characters for results`,
+  tNoResults: () => 'No search results',
+  tSelectedOption: (selectedOption, length, index) => `${selectedOption} ${index + 1} of ${length} is highlighted`,
+  tResults: (length, contentSelectedOption) => {
+    const words = {
+      result: (length === 1) ? 'result' : 'results',
+      is: (length === 1) ? 'is' : 'are'
     }
+
+    return `${length} ${words.result} ${words.is} available. ${contentSelectedOption}`
   }
+}
+
+const normalizeProps = createDefaultProps(defaultProps)
+
+export default class Status extends Component {
+  static defaultProps = defaultProps
 
   state = {
     bump: false,
     debounced: false
+  }
+
+  // Preact 11 no longer applies `defaultProps` when creating a vnode, so the
+  // defaults are merged in on every props assignment instead. Preact reads and
+  // writes `this.props` directly, so both accessors are required.
+  get props () {
+    return this._defaultedProps
+  }
+
+  set props (props) {
+    this._defaultedProps = normalizeProps(props)
   }
 
   constructor (props) {

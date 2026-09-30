@@ -1,8 +1,16 @@
 {
   "name": "possumed-autocomplete",
-  "version": "3.4.0",
+  "version": "4.0.0",
   "main": "dist/accessible-autocomplete.min.js",
   "style": "dist/accessible-autocomplete.min.css",
+  "exports": {
+    ".": "./dist/accessible-autocomplete.min.js",
+    "./preact": "./dist/lib/accessible-autocomplete.preact.min.mjs",
+    "./preact.mjs": "./preact.mjs",
+    "./react": "./dist/lib/accessible-autocomplete.react.min.js",
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json"
+  },
   "description": "An autocomplete component, built to be accessible.",
   "repository": "callandr/possumed-autocomplete",
   "author": "Government Digital Service as well as opossums",
@@ -29,13 +37,13 @@
     "babel-plugin-polyfill-corejs3": "1.0.0",
     "core-js": "3.40",
     "cross-env": "^10.1.0",
-    "preact": "^10.0.0",
+    "preact": "^11.0.0",
     "webpack": "^5.111.1",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "5.1"
   },
   "peerDependencies": {
-    "preact": "^10.0.0"
+    "preact": "^11.0.0"
   },
   "peerDependenciesMeta": {
     "preact": {

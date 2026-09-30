@@ -2,6 +2,53 @@
 
 ## Unreleased
 
+### Breaking changes
+
+#### Upgraded to Preact 11
+
+The Preact peer dependency is now `^11.0.0`. There are a few things to be aware of.
+
+**Internet Explorer 11 is no longer supported.** Preact 11 dropped IE11 and relies on
+`Symbol` and `queueMicrotask`. We can't polyfill those on Preact's behalf because
+`node_modules` is excluded from `babel-loader`. The browserslist targets now match
+Preact 11's supported browsers (Chrome >= 71, Safari >= 12.1, Firefox >= 69,
+Edge >= 79).
+
+**The Preact bundle is now an ES module.** Preact 11 is distributed as ESM only, so
+there is no longer a UMD build that reads a `window.preact` global. The bundle
+moved from `dist/lib/accessible-autocomplete.preact.min.js` to
+`dist/lib/accessible-autocomplete.preact.min.mjs`, and it now imports `preact` as a
+real ES module dependency.
+
+If you load the bundle with a `<script type="module">` tag, map the bare `preact`
+specifier yourself, for example:
+
+```html
+<script type="importmap">
+  { "imports": { "preact": "https://esm.sh/preact@11" } }
+</script>
+```
+
+If you consume the package through a bundler, no change is needed beyond making
+sure it can resolve `.mjs` files.
+
+**`possumed-autocomplete/preact` now resolves to the ESM bundle.** A new `exports`
+map was added to `package.json` to make that entry point work. The root
+`preact.js` re-export became `preact.mjs` (reachable as
+`possumed-autocomplete/preact.mjs`), which is useful if you load the component
+straight from a CDN with a `<script type="module">` tag. Deep imports such as
+`possumed-autocomplete/dist/accessible-autocomplete.min.css` still resolve, via
+`./dist/*`.
+
+**Default values are unchanged.** Preact 11 removed `defaultProps` support from its
+core `createElement` (it now lives in `preact/compat`). The `Autocomplete` and
+`Status` components now apply their defaults through a `props` accessor, so every
+documented default still behaves the same way, including on re-render. If you
+subclassed either component and relied on `static defaultProps` being honoured by
+Preact itself, override `props` in your subclass the same way.
+
+The React bundle is unaffected and remains UMD.
+
 ## 3.0.1 - 2024-09-12
 
 ### Fixes

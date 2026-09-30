@@ -140,7 +140,11 @@ const bundleStandalone = {
 }
 
 /**
- * Bundle for Preact 'accessible-autocomplete/preact.js'
+ * Bundle for Preact 'accessible-autocomplete/preact'
+ *
+ * Preact 11 is distributed as ESM only, so this bundle emits an ES module and
+ * imports `preact` as a real ESM dependency rather than reaching for a
+ * `window.preact` UMD global.
  *
  * @satisfies {WebpackConfiguration}
  */
@@ -150,14 +154,19 @@ const bundlePreact = {
   entry: {
     'accessible-autocomplete.preact': {
       import: join(cwd(), 'src/autocomplete.js'),
-      filename: 'lib/[name].min.js',
+      filename: 'lib/[name].min.mjs',
       library: {
-        name: 'Autocomplete',
-        type: 'umd',
-        umdNamedDefine: true
+        type: 'module'
       }
     }
   },
+
+  experiments: {
+    ...config.experiments,
+    outputModule: true
+  },
+
+  externalsType: 'module',
 
   externals: {
     preact: 'preact'
@@ -166,9 +175,7 @@ const bundlePreact = {
   output: {
     ...config.output,
 
-    // Support `window.preact` when not bundled
-    // e.g. with all dependencies included via unpkg.com
-    globalObject: 'this'
+    module: true
   },
 
   plugins: [

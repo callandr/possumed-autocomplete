@@ -1,5 +1,6 @@
-# This list builds on the GOV.UK service manual's browser testing recommendations
-# https://www.gov.uk/service-manual/technology/designing-for-different-browsers-and-devices
+# The floors below match the browsers Preact 11 supports. Preact 11 dropped IE11
+# and relies on `Symbol` and `queueMicrotask`, which we cannot polyfill for it
+# because `node_modules` is excluded from `babel-loader`.
 
 > 0.1% in GB and not dead
 last 6 Chrome versions
@@ -7,6 +8,7 @@ last 6 Firefox versions
 last 6 Edge versions
 last 2 Samsung versions
 Firefox ESR
-Safari >= 11
-iOS >= 11
-ie 11
+Chrome >= 71
+Safari >= 12.1
+Edge >= 79
+iOS >= 12.1

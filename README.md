@@ -85,24 +85,33 @@ You can also import it using Sass:
 If you already use Preact in your application, you can import a bundle that will use that:
 
 ```js
-import preact from 'preact'
+import { render } from 'preact'
 import Autocomplete from 'accessible-autocomplete/preact'
 
-preact.render(
+render(
   <Autocomplete id='autocomplete' source={suggest} />,
   document.querySelector('#container')
 )
 ```
 
+Note that this bundle is an ES module, because Preact 11 is distributed as ESM
+only. Your bundler needs to resolve it as ESM, and it must be able to load
+`.mjs` files. The React bundle (`accessible-autocomplete/react`) is still a UMD
+bundle.
+
 [Try out the Preact example!](https://alphagov.github.io/accessible-autocomplete/examples/preact/)
 
 #### Preact versions
 
-Preact v8.5.3 has been tested to work with the Accessible Autocomplete - although make sure to check out [documented issues](https://github.com/alphagov/accessible-autocomplete/issues).
+Preact 11 is the supported version. Because Preact 11 is ESM-only and no longer
+supports Internet Explorer 11, neither does this library: its browserslist
+targets now match Preact 11's supported browsers (Chrome >= 71, Safari >= 12.1,
+Firefox >= 69, Edge >= 79).
 
-Preact 10.19.6 has been incompletely tested with the Accessible Autocomplete. No issues were found in Chrome and Firefox, but our automated tests for picking an option using the keyboard failed in Internet Explorer 11 (an issue we could not replicate when testing manually, though). 
-
-We recommend you carry out thorough testing if you wish to use this or later versions of Preact. 
+Preact v8 and v10 are not supported. The `Autocomplete` and `Status` components
+previously relied on `static defaultProps`, which Preact 11 removed from core
+(it now lives in `preact/compat`). This library applies its defaults itself, so
+the documented default values are unchanged.
 
 ### Using with React
 
